@@ -1,0 +1,36 @@
+.top-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 20px 10px;
+  background: transparent;
+  flex-shrink: 0;
+  z-index: 50;
+  position: relative;
+}
+
+.top-nav-btn {
+  padding: 8px 28px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Caveat', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.top-nav-btn.active {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: white;
+  color: #c8386a;
+  box-shadow: 0 4px 16px rgba(200, 56, 106, 0.25);
+}
+
+.top-nav-btn:active {
+  transform: scale(0.95);
+}

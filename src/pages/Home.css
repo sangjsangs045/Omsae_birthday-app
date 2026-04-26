@@ -1,0 +1,165 @@
+/* ── Home root ─────────────────────────────────────────── */
+.home-root {
+  width: 412px;
+  height: 917px;
+  position: relative;
+  overflow: hidden;
+  background: #f4a7b9;
+}
+
+/* ── 전체 배경 ──────────────────────────────────────────── */
+.h-bg {
+  position: absolute;
+  left: 0; top: 0;
+  width: 412px; height: 917px;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ══════════════════════════════════════════════════════
+   hover / click 공통 모션
+══════════════════════════════════════════════════════ */
+.h-wobble {
+  position: absolute;
+  cursor: pointer;
+}
+.h-wobble:hover {
+  animation: h-wobble 0.45s ease;
+}
+.h-wobble:active {
+  animation: none;
+  transform: scale(0.94) !important;
+}
+@keyframes h-wobble {
+  0%   { transform: none; }
+  20%  { transform: translateX(-5px) rotate(-2deg); }
+  40%  { transform: translateX(4px)  rotate(2deg); }
+  60%  { transform: translateX(-2px) rotate(-1deg); }
+  80%  { transform: translateX(2px)  rotate(1deg); }
+  100% { transform: none; }
+}
+
+/* ══════════════════════════════════════════════════════
+   ② 폰 (→ Friend)
+   Figma inset: top=43.6%×917, left=36.72%×412,
+               right=13.3%×412, bottom=25.29%×917
+══════════════════════════════════════════════════════ */
+.h-phone-wrap {
+  left: 151.25px; top: 399.81px;
+  width: 205.95px; height: 285.28px;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+}
+.h-phone {
+  width: 180px; height: 269px;
+  object-fit: contain;
+  transform: rotate(-5.72deg);
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════
+   ③ 인생네컷 (→ Photo)
+   Figma: left:5.09px, top:516.99px, w:233.8px, h:279.46px
+   outer rotate(24.69deg) → inner rotate(-10.77deg)
+══════════════════════════════════════════════════════ */
+.h-strip-wrap {
+  left: 5.09px; top: 516.99px;
+  width: 233.8px; height: 279.46px;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+}
+.h-strip-rotate {
+  width: 147px; height: 240px;
+  overflow: clip;
+  position: relative;
+  transform: rotate(24.69deg);
+  flex-shrink: 0;
+}
+.h-strip-inner {
+  position: absolute;
+  left: 22px; top: 5.09px;
+  width: 108.717px; height: 229.812px;
+  display: flex; align-items: center; justify-content: center;
+}
+.h-strip-paper {
+  background: white;
+  padding: 12.697px 5.555px 27.379px;
+  box-shadow: 0.794px 1.587px 5.555px rgba(0, 0, 0, 0.25);
+  width: 68.65px;
+  transform: rotate(-10.77deg);
+  display: flex;
+  flex-direction: column;
+  gap: 4.761px;
+  pointer-events: none;
+}
+.h-strip-paper img {
+  width: 57.535px; height: 41.663px;
+  object-fit: cover;
+  border: 0.794px solid white;
+  display: block;
+}
+
+/* 인생네컷 별 스티커 (image 77) */
+.h-star77 {
+  position: absolute;
+  left: 105.16px; top: 529.9px;
+  width: 26.89px; height: 26.227px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 8;
+  filter: drop-shadow(0px 2.452px 2.452px rgba(0, 0, 0, 0.26));
+}
+
+/* 인생네컷 장식 (image 76) */
+.h-img76-wrap {
+  position: absolute;
+  left: 144.62px; top: 609.05px;
+  width: 58.989px; height: 74.406px;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+  z-index: 8;
+}
+.h-img76 {
+  width: 58.65px; height: 74.138px;
+  object-fit: contain;
+  transform: rotate(0.26deg);
+}
+
+/* ══════════════════════════════════════════════════════
+   ④ 편지 옆 스티커 (image 65, 장식)
+   Figma: left:223.71px, top:683.31px, w:69.066px, h:72.365px
+   inner: left:-19.66%, top:-14.07%, w:139.31%, h:132.96%
+══════════════════════════════════════════════════════ */
+.h-env-deco {
+  position: absolute;
+  left: 223.71px; top: 683.31px;
+  width: 69.066px; height: 72.365px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 6;
+}
+.h-env-img {
+  position: absolute;
+  top: -10.19px; left: -13.58px;
+  width: 96.19px; height: 96.17px;
+  object-fit: contain;
+}
+
+/* ══════════════════════════════════════════════════════
+   ④ 편지 봉투 (→ Letter)
+   Figma: left:174.12px, top:691.31px, w:173.036px, h:150.157px
+   inner: w:154px, h:126px, rotate(-9.7deg)
+══════════════════════════════════════════════════════ */
+.h-letter-wrap {
+  left: 174.12px; top: 691.31px;
+  width: 173.036px; height: 150.157px;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+}
+.h-letter {
+  width: 154px; height: 126px;
+  object-fit: contain;
+  transform: rotate(-9.7deg);
+  pointer-events: none;
+}

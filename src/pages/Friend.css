@@ -1,0 +1,156 @@
+/* ── 루트 ─────────────────────────────────────────────── */
+.friend-root {
+  width: 412px;
+  height: 917px;
+  position: relative;
+  overflow: hidden;
+  background: white;
+}
+
+/* ① 배경 이미지 */
+.fr-bg {
+  position: absolute;
+  left: 0; top: 0;
+  width: 412px; height: 917px;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ② 탭 네비 */
+.fr-nav {
+  position: absolute;
+  left: 50%;
+  top: 70px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 60px;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  white-space: nowrap;
+}
+.fr-nav-tab {
+  padding: 14px 20px;
+  border-radius: 130px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: black;
+  letter-spacing: 4px;
+  cursor: pointer;
+  font-family: 'Pretendard', 'Inter', sans-serif;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.fr-nav-tab.active {
+  background: #d1afff;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.14);
+}
+
+/* ③ 폰 스크린 회색 배경 */
+/* Figma: 사진 strip y=302.12, h=290.06 */
+.fr-screen-bg {
+  position: absolute;
+  left: 93px; top: 302.12px;
+  width: 228.834px; height: 290.06px;
+  background: #bcbcbc;
+  border-radius: 6px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ⑤ 사진 스트립 클립 영역 — 스크린 배경과 완전히 일치 */
+.fr-photos-clip {
+  position: absolute;
+  left: 93px; top: 302.12px;
+  width: 228.834px; height: 290.06px;
+  overflow: hidden;
+  border-radius: 6px;
+  z-index: 4;
+}
+
+/* 개별 사진 아이템 — 클립 컨테이너 중앙 기준 절대 배치 */
+.fr-photo-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 215.701px;
+  height: 290.063px;
+  overflow: hidden;
+  /* transform은 inline style로 제어 (offset 포함), 애니메이션 적용 */
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fr-photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  pointer-events: none;
+  /* 빈티지 필름카메라 필터 */
+  filter: sepia(0.28) saturate(0.82) contrast(0.88) brightness(1.08) blur(0.3px);
+}
+
+/* grain 오버레이 — SVG feTurbulence를 data URI로 생성, overlay 블렌딩 */
+.fr-photo-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+  mix-blend-mode: overlay;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* vignette — 가장자리를 서서히 어둡게 */
+.fr-photo-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.38) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+/* 피그마에서 overflow가 있는 사진 (image 2) */
+.fr-photo-overflow {
+  position: absolute !important;
+  height: 137.78% !important;
+  left: -11.09% !important;
+  top: 0 !important;
+  width: 247.04% !important;
+  object-fit: cover !important;
+}
+
+/* ⑥⑦ 화살표 버튼 공통 */
+.fr-arrow {
+  position: absolute;
+  top: calc(50% + 189.5px);
+  transform: translateY(-50%);
+  width: 54px; height: 54px;
+  border-radius: 27px;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px;
+  z-index: 10;
+  transition: opacity 0.2s;
+}
+.fr-arrow:disabled { opacity: 0.3; cursor: default; }
+.fr-arrow:not(:disabled):active { background: rgba(255, 255, 255, 0.8); }
+.fr-arrow img {
+  width: 18px; height: 36px;
+  object-fit: contain;
+  display: block;
+}
+
+/* 왼쪽: left:50px */
+.fr-arrow-left  { left: 50px; }
+/* 오른쪽: left:calc(60%+60.8px) */
+.fr-arrow-right { left: calc(60% + 60.8px); }

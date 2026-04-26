@@ -1,0 +1,285 @@
+/* ── 공통 루트 ─────────────────────────────────────────── */
+.letter-root {
+  width: 412px;
+  height: 917px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hidden { display: none !important; }
+
+/* ════════════════════════════════════════════════════════
+   OUT 뷰 — 봉투 목록 (04_Latter / 9:325)
+════════════════════════════════════════════════════════ */
+.letter-out {
+  width: 412px;
+  height: 917px;
+  position: relative;
+  background: white;
+  overflow: hidden;
+}
+
+/* 그라디언트 오버레이 */
+.lo-overlay {
+  position: absolute;
+  left: -10.79px; top: -9.14px;
+  width: 422.787px; height: 948.556px;
+  background: linear-gradient(180deg,
+    rgba(75, 206, 235, 0.2) 0%,
+    rgba(229, 121, 209, 0.2) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 별 배경 (Group14 — x:0, y:79.91, w:382.39, h:818.22) */
+.lo-stars {
+  position: absolute;
+  left: 0;
+  top: 79.91px;
+  width: 382.39px;
+  height: 818.22px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── 탭 네비 ────────────────────────────────────────────── */
+.lo-nav {
+  position: absolute;
+  left: 50%;
+  top: 69.91px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 60px;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.lo-nav-tab {
+  padding: 14px 20px;
+  border-radius: 130px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: black;
+  letter-spacing: 4px;
+  cursor: pointer;
+  font-family: 'Pretendard', 'Inter', sans-serif;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.lo-nav-tab.active {
+  background: #d1afff;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.14);
+}
+
+/* ── 봉투 공통 ──────────────────────────────────────────── */
+.lo-env-wrap {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.lo-env-wrap:hover { animation: env-wobble 0.5s ease; }
+.lo-env-wrap:active { opacity: 0.85; }
+
+.lo-env-inner {
+  flex-shrink: 0;
+}
+
+.lo-env-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* ── 봉투 1 — From 단비, rotate(-2.4deg) ─────────────────
+   outer: left:-42.59px, top:197.83px, w:402.704px, h:291.818px
+   inner: 391.49×275.645px                                   */
+.env1 {
+  left: -42.59px;
+  top: 197.83px;
+  width: 402.704px;
+  height: 291.818px;
+  z-index: 6; /* Env1이 Env2 위에 표시되어 겹치는 영역 클릭 우선 */
+}
+.env1-inner {
+  transform: rotate(-2.4deg);
+  width: 391.49px;
+  height: 275.645px;
+}
+
+/* ── 봉투 2 — From 은하, rotate(+38.04deg) ───────────────
+   outer: left:20px, top:409.28px, w:478.503px, h:458.639px
+   inner: 391.75×275.828px                                   */
+.env2 {
+  left: 20px;
+  top: 409.28px;
+  width: 478.503px;
+  height: 458.639px;
+  z-index: 5;
+}
+.env2-inner {
+  transform: rotate(38.04deg);
+  width: 391.75px;
+  height: 275.828px;
+}
+
+/* ── 봉투 흔들림 키프레임 ───────────────────────────────── */
+@keyframes env-wobble {
+  0%   { transform: none; }
+  20%  { transform: translateX(-6px) rotate(-2deg); }
+  40%  { transform: translateX(5px)  rotate(2deg); }
+  60%  { transform: translateX(-3px) rotate(-1deg); }
+  80%  { transform: translateX(2px)  rotate(1deg); }
+  100% { transform: none; }
+}
+
+/* ════════════════════════════════════════════════════════
+   IN 뷰 — 편지 상세 (04_Latter_2 / 9:287)
+════════════════════════════════════════════════════════ */
+.letter-in {
+  width: 412px;
+  height: 917px;
+  position: relative;
+  background: white;
+  overflow: hidden;
+}
+
+/* 편지 전체 합성 이미지 (최신 피그마 단일 이미지) */
+.li-full-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 자연 배경 */
+.li-nature {
+  position: absolute;
+  left: -710.18px; top: -14.71px;
+  width: 1714.827px; height: 935.36px;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 색조 오버레이 */
+.li-overlay {
+  position: absolute;
+  left: 0; top: -9.14px;
+  width: 422.787px; height: 948.556px;
+  background: rgba(178, 212, 219, 0.2);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 뒤에 있는 봉투 컨테이너 */
+.li-env-behind {
+  position: absolute;
+  left: -95.32px; top: 131.42px;
+  width: 390.109px; height: 287.642px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 봉투 이미지 — rotate(-21.16deg), 351.6×172.361px */
+.li-env-img {
+  width: 351.6px;
+  height: 172.361px;
+  object-fit: contain;
+  transform: rotate(-21.16deg);
+  box-shadow: 2px 2px 14px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+/* 편지지 — left:20px, top:235.21px, w:372px, h:526.588px */
+.li-paper {
+  position: absolute;
+  left: 20px;
+  top: 235.21px;
+  width: 372px;
+  height: 526.588px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* 편지 텍스트 이미지 — left/width/height는 letter별로 인라인 스타일로 override */
+.li-text {
+  position: absolute;
+  top: 339.5px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* 신 레이아웃 텍스트 요소 (letter 2 — From 은하) */
+.li-text-to {
+  position: absolute;
+  left: calc(20% + 2.2px);
+  top: 330.65px;
+  width: 245.474px;
+  height: 347.996px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.li-text-from {
+  position: absolute;
+  left: calc(40% + 68.45px);
+  top: 685.96px;
+  width: 57.44px;
+  height: 12.287px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.li-text-vector {
+  position: absolute;
+  left: calc(20% + 57.51px);
+  top: 335.31px;
+  width: 6.112px;
+  height: 4.63px;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* X 닫기 버튼 — left:calc(80%+26.4px), top:61.91px, size:36px */
+.li-close-btn {
+  position: absolute;
+  left: calc(80% + 26.4px);
+  top: 61.91px;
+  width: 36px; height: 36px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  z-index: 10;
+  transition: background 0.2s;
+}
+.li-close-btn:active { background: rgba(255, 255, 255, 0.8); }
+.li-close-btn img {
+  width: 24px; height: 24px;
+  display: block;
+}
