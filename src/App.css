@@ -1,4 +1,4 @@
-/* 뷰포트 전체를 채우는 외부 래퍼 — background는 JS에서 페이지별 인라인 적용 */
+/* 뷰포트 전체 — 모든 페이지 바깥 여백 통일 배경색 */
 .app-viewport {
   width: 100vw;
   height: 100vh;
@@ -6,7 +6,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: background 0.3s ease;
+  background-color: #FBE7EB;
+  position: relative;
 }
 
 /* 디자인 캔버스 412×917 — transform scale로 뷰포트에 맞게 축소/확대 */
@@ -17,4 +18,5 @@
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
