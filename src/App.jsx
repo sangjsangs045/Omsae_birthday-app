@@ -17,7 +17,7 @@ function App() {
     const updateScale = () => {
       const scaleX = window.innerWidth  / DESIGN_W
       const scaleY = window.innerHeight / DESIGN_H
-      setScale(Math.min(scaleX, scaleY))
+      setScale(Math.max(scaleX, scaleY))
     }
     updateScale()
     window.addEventListener('resize', updateScale)
