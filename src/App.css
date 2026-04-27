@@ -7,18 +7,16 @@
   justify-content: center;
   overflow: hidden;
   background-color: #FBE7EB;
-  position: relative;
   margin: 0;
   padding: 0;
 }
 
-/* 디자인 캔버스 412×917 — transform scale로 뷰포트에 맞게 축소/확대 */
+/* 디자인 캔버스 412×917 — vh 기준 scale, 가로 중앙 정렬 */
 .app-canvas {
   width: 412px;
   height: 917px;
   transform-origin: center center;
   flex-shrink: 0;
   position: relative;
-  overflow: hidden;
   z-index: 1;
 }

@@ -15,9 +15,7 @@ function App() {
 
   useEffect(() => {
     const updateScale = () => {
-      const scaleX = window.innerWidth  / DESIGN_W
-      const scaleY = window.innerHeight / DESIGN_H
-      setScale(Math.max(scaleX, scaleY))
+      setScale(window.innerHeight / DESIGN_H)
     }
     updateScale()
     window.addEventListener('resize', updateScale)
