@@ -645,10 +645,14 @@ function Photo06H({ photos, frameConfig, onDelete }) {
         ctx.fillStyle = 'white'
         ctx.fillRect(0, 0, width, height)
 
+        // photos 촬영 순서(행 우선) → slot 배치 순서(열 우선) 변환
+        // photos: [좌상, 우상, 좌하, 우하]  slots: [좌상, 좌하, 우상, 우하]
+        // mapping[i] = slots에서 photos[i]가 들어갈 인덱스
+        const slotOrder = [0, 2, 1, 3]
         const total = Math.min(photos.length, slots.length)
         for (let i = 0; i < total; i++) {
           if (cancelled) return
-          const slot = slots[i]
+          const slot = slots[slotOrder[i]]
           const pImg = await loadImage(photos[i])
           if (cancelled) return
 
