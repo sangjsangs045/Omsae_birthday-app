@@ -9,6 +9,9 @@ import frame04 from '../assets/frames/수정/인생네컷 프레임_04_사람-�
 import frame05 from '../assets/frames/수정/인생네컷 프레임_05_생일축하.png'
 import frame06 from '../assets/frames/수정/인생네컷 프레임_06_아임더퀸.png'
 import frame10 from '../assets/frames/수정/인생네컷 프레임_10_가로형.png'
+import frame15 from '../assets/frames/수정/인생네컷 프레임_캐릭터-세포-15.png'
+import frame16 from '../assets/frames/수정/인생네컷 프레임_캐릭터-세포-16.png'
+import frame17 from '../assets/frames/수정/인생네컷 프레임_캐릭터-세포-17.png'
 
 // ── 01 에셋 ──────────────────────────────────────────
 const IMG_01_FULL = 'https://www.figma.com/api/mcp/asset/deef5ac9-67ae-4fa2-943e-8fb139035534'
@@ -99,27 +102,72 @@ const FRAME_CONFIGS = [
       { x: 30,  y: 840, width: 342, height: 240 },
     ],
   },
+  // ── 가로형 4종 (인덱스 6·7·8·9) ─────────────────────
   {
     id: '10_horizontal',
     src: frame10,
     type: 'horizontal',
+    width: 828, height: 1472,
+    slots: [
+      { x: 40,  y: 300, width: 330, height: 380 },
+      { x: 40,  y: 720, width: 330, height: 380 },
+      { x: 450, y: 200, width: 330, height: 330 },
+      { x: 450, y: 580, width: 330, height: 500 },
+    ],
+  },
+  {
+    id: '15_cell',
+    src: frame15,
+    type: 'horizontal',
     width: 841, height: 1271,
     slots: [
-      { x: 437, y: 64,  width: 354, height: 420 }, // 우상단
-      { x: 46,  y: 337, width: 354, height: 420 }, // 좌중단
-      { x: 437, y: 508, width: 354, height: 420 }, // 우중단
-      { x: 46,  y: 781, width: 354, height: 457 }, // 좌하단
+      { x: 50,  y: 191, width: 355, height: 429 },
+      { x: 50,  y: 651, width: 355, height: 429 },
+      { x: 436, y: 191, width: 355, height: 429 },
+      { x: 436, y: 651, width: 355, height: 429 },
+    ],
+  },
+  {
+    id: '16_cell',
+    src: frame16,
+    type: 'horizontal',
+    width: 841, height: 1271,
+    slots: [
+      { x: 50,  y: 191, width: 355, height: 429 },
+      { x: 50,  y: 651, width: 355, height: 429 },
+      { x: 436, y: 191, width: 355, height: 429 },
+      { x: 436, y: 651, width: 355, height: 429 },
+    ],
+  },
+  {
+    id: '17_cell',
+    src: frame17,
+    type: 'horizontal',
+    width: 841, height: 1271,
+    slots: [
+      { x: 50,  y: 191, width: 355, height: 429 },
+      { x: 50,  y: 651, width: 355, height: 429 },
+      { x: 436, y: 191, width: 355, height: 429 },
+      { x: 436, y: 651, width: 355, height: 429 },
     ],
   },
 ]
 
-const PORTRAIT_FRAMES = FRAME_CONFIGS.slice(0, 6)
+const PORTRAIT_FRAMES   = FRAME_CONFIGS.slice(0, 6)
+const HORIZONTAL_FRAMES = FRAME_CONFIGS.slice(6)    // 10·15·16·17
 
-// ── 03 캐러셀 상수 ────────────────────────────────────
+// ── 03 세로형 캐러셀 상수 ─────────────────────────────
 const SIDE_W    = 136.327
 const GAP       = 36
 const STEP      = SIDE_W + GAP
 const SCREEN_CX = 206
+
+// ── 03H 가로형 캐러셀 상수 ───────────────────────────
+const H_SIDE_W = 190
+const H_SIDE_H = 310
+const H_GAP    = 36
+const H_STEP   = H_SIDE_W + H_GAP  // 226
+const H_SCR_CX = 206
 
 // ── 유틸: 이미지 로드 ──────────────────────────────────
 function loadImage(src) {
@@ -241,9 +289,22 @@ function Photo03({ initIdx, onConfirm, onClose, onLandscape }) {
 }
 
 // ─────────────────────────────────────────────────────
-//  03H  가로 프레임 선택 (03-1)
+//  03H  가로 프레임 캐러셀 (03-1)
 // ─────────────────────────────────────────────────────
-function Photo03H({ onConfirm, onClose, onPortrait }) {
+function Photo03H({ initIdx, onConfirm, onClose, onPortrait }) {
+  const [frameIdx,        setFrameIdx]        = useState(initIdx ?? 0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
+  const go = (newIdx) => {
+    setIsTransitioning(true)
+    setFrameIdx(newIdx)
+    setTimeout(() => setIsTransitioning(false), 350)
+  }
+  const prev = () => { if (frameIdx > 0) go(frameIdx - 1) }
+  const next = () => { if (frameIdx < HORIZONTAL_FRAMES.length - 1) go(frameIdx + 1) }
+
+  const stripX = H_SCR_CX - (frameIdx * H_STEP + H_SIDE_W / 2)
+
   return (
     <div className="ph-root ph03-root">
       <div className="ph03-bg-box" />
@@ -258,17 +319,33 @@ function Photo03H({ onConfirm, onClose, onPortrait }) {
         <button className="ph03-toggle-tab active">가로</button>
       </div>
 
-      {/* 단일 프레임 표시 — 항상 선택 상태 */}
-      <div className="ph03h-frame-wrap">
-        <div className="ph03h-frame-item is-selected">
-          <img className="ph03-frame-img" src={frame10} alt="" />
+      <div className="ph03h-strip-outer">
+        <div className="ph03h-strip" style={{ transform: `translateX(${stripX}px)` }}>
+          {HORIZONTAL_FRAMES.map((frame, i) => {
+            const isCenter = i === frameIdx
+            return (
+              <div
+                key={frame.id}
+                className={`ph03h-carousel-item${isCenter ? ' is-center' : ''}${isTransitioning ? ' is-transiting' : ''}`}
+              >
+                <img className="ph03-frame-img" src={frame.src} alt="" />
+              </div>
+            )
+          })}
         </div>
       </div>
 
       <div className="ph03-fade-left"  />
       <div className="ph03-fade-right" />
 
-      <button className="ph03-confirm-btn ph-hover-btn" onClick={onConfirm}>
+      <button className="ph03-arrow ph03-arrow-left" onClick={prev} disabled={frameIdx === 0}>
+        <img src={IMG_NAV_ARR} alt="prev" style={{ transform: 'rotate(180deg)' }} />
+      </button>
+      <button className="ph03-arrow ph03-arrow-right" onClick={next} disabled={frameIdx === HORIZONTAL_FRAMES.length - 1}>
+        <img src={IMG_NAV_ARR} alt="next" />
+      </button>
+
+      <button className="ph03-confirm-btn ph-hover-btn" onClick={() => onConfirm(frameIdx)}>
         선택 완료
       </button>
     </div>
@@ -647,6 +724,7 @@ export default function Photo({ onNavigate }) {
   const [step,          setStep]          = useState(1)
   const [selectedFrame, setSelectedFrame] = useState(0)
   const [portraitIdx,   setPortraitIdx]   = useState(0)
+  const [horizontalIdx, setHorizontalIdx] = useState(0)
   const [photos,        setPhotos]        = useState([])
 
   const frameConfig = FRAME_CONFIGS[selectedFrame] ?? FRAME_CONFIGS[0]
@@ -673,7 +751,8 @@ export default function Photo({ onNavigate }) {
       )}
       {step === 35 && (
         <Photo03H
-          onConfirm={() => { setSelectedFrame(6); setStep(4) }}
+          initIdx={horizontalIdx}
+          onConfirm={idx => { setHorizontalIdx(idx); setSelectedFrame(6 + idx); setStep(4) }}
           onClose={() => setStep(2)}
           onPortrait={() => setStep(3)}
         />

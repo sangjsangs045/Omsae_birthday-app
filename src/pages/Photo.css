@@ -318,31 +318,55 @@
 .ph03-confirm-btn:active { background: #9b5fe0; }
 
 /* ════════════════════════════════════════════════════════
-   03H  가로 프레임 선택 (03-1)
+   03H  가로 프레임 캐러셀 (03-1)
 ════════════════════════════════════════════════════════ */
 
-/* 단일 프레임 — Figma: top:233.46px, w:321.625px, h:486.071px, centered */
-.ph03h-frame-wrap {
+/* 스트립 외부 컨테이너 */
+.ph03h-strip-outer {
   position: absolute;
-  left: 50%;
-  top: 233.46px;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  left: 0; right: 0;
+  top: calc(50% + 18.92px);
+  transform: translateY(-50%);
+  height: 440px; /* 가장 긴 프레임(frame10 338px) * 1.2769 */
+  overflow: visible;
   z-index: 5;
+  display: flex;
+  align-items: center;
 }
 
-.ph03h-frame-item {
-  width: 321.625px;
-  height: 486.071px;
+/* 슬라이딩 스트립 */
+.ph03h-strip {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 아이템 — 너비 고정, 높이는 이미지 비율에 맡김 */
+.ph03h-carousel-item {
+  width: 190px;
+  height: auto;
   border-radius: 4px;
   flex-shrink: 0;
   position: relative;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ph03h-frame-item.is-selected {
+/* 선택된(센터) 프레임 — scale만 적용, stroke는 img에 */
+.ph03h-carousel-item.is-center {
+  transform: scale(1.2769);
+}
+
+/* stroke를 실제 이미지 영역에만 적용 */
+.ph03h-carousel-item .ph03-frame-img {
+  height: auto; /* object-fit 대신 자연 비율 */
+}
+.ph03h-carousel-item.is-center .ph03-frame-img {
   box-shadow: 0 0 0 3px #ffa4a4;
+}
+.ph03h-carousel-item.is-center.is-transiting .ph03-frame-img {
+  box-shadow: none;
 }
 
 /* ════════════════════════════════════════════════════════
