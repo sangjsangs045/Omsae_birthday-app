@@ -109,10 +109,10 @@ const FRAME_CONFIGS = [
     type: 'horizontal',
     width: 828, height: 1472,
     slots: [
-      { x: 40,  y: 300, width: 330, height: 380 },
-      { x: 40,  y: 720, width: 330, height: 380 },
-      { x: 450, y: 200, width: 330, height: 330 },
-      { x: 450, y: 580, width: 330, height: 500 },
+      { x: 48,  y: 310, width: 320, height: 360 },
+      { x: 48,  y: 720, width: 320, height: 520 },
+      { x: 460, y: 160, width: 320, height: 380 },
+      { x: 460, y: 580, width: 320, height: 540 },
     ],
   },
   {
