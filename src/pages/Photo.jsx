@@ -8,6 +8,7 @@ import frame03 from '../assets/frames/수정/인생네컷 프레임_03_봄형.pn
 import frame04 from '../assets/frames/수정/인생네컷 프레임_04_사람-캐릭터형.png'
 import frame05 from '../assets/frames/수정/인생네컷 프레임_05_생일축하.png'
 import frame06 from '../assets/frames/수정/인생네컷 프레임_06_아임더퀸.png'
+
 import frame10 from '../assets/frames/수정/인생네컷 프레임_10_가로형.png'
 import frame15 from '../assets/frames/수정/인생네컷 프레임_캐릭터-세포-15.png'
 import frame16 from '../assets/frames/수정/인생네컷 프레임_캐릭터-세포-16.png'
@@ -107,12 +108,12 @@ const FRAME_CONFIGS = [
     id: '10_horizontal',
     src: frame10,
     type: 'horizontal',
-    width: 828, height: 1472,
+    width: 841, height: 1271,
     slots: [
-      { x: 48,  y: 310, width: 320, height: 360 },
-      { x: 48,  y: 720, width: 320, height: 520 },
-      { x: 460, y: 160, width: 320, height: 380 },
-      { x: 460, y: 580, width: 320, height: 540 },
+      { x: 45,  y: 337, width: 355, height: 430 },
+      { x: 45,  y: 786, width: 355, height: 430 },
+      { x: 441, y: 65,  width: 355, height: 430 },
+      { x: 441, y: 515, width: 355, height: 430 },
     ],
   },
   {
@@ -661,17 +662,13 @@ function Photo06H({ photos, frameConfig, onDelete }) {
           ctx.rect(slot.x, slot.y, slot.width, slot.height)
           ctx.clip()
 
-          const pr = pImg.naturalWidth / pImg.naturalHeight
-          const sr = slot.width / slot.height
-          let dw, dh, dx, dy
-          if (pr > sr) {
-            dh = slot.height; dw = dh * pr
-            dy = slot.y;      dx = slot.x - (dw - slot.width) / 2
-          } else {
-            dw = slot.width;  dh = dw / pr
-            dx = slot.x;      dy = slot.y - (dh - slot.height) / 2
-          }
-          ctx.drawImage(pImg, dx, dy, dw, dh)
+          const scale      = Math.max(slot.width / pImg.naturalWidth, slot.height / pImg.naturalHeight)
+          const drawWidth  = pImg.naturalWidth  * scale
+          const drawHeight = pImg.naturalHeight * scale
+          const drawX      = slot.x + (slot.width  - drawWidth)  / 2
+          const drawY      = slot.y + (slot.height - drawHeight) / 2
+
+          ctx.drawImage(pImg, drawX, drawY, drawWidth, drawHeight)
           ctx.restore()
         }
 
